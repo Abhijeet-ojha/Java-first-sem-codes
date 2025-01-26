@@ -1,0 +1,26 @@
+import java.util.Scanner;
+
+public class Main {
+
+	public static void main(String[] args) {
+		Scanner sc=new Scanner(System.in);
+		System.out.println("Enter the value of number of hours worked: ");
+		int hw = sc.nextInt();
+		System.out.println("Enter the hourly rate: ");
+		int hr = sc.nextInt();
+		double wage=0;
+		
+		if (hw<=40)
+		{
+			wage += hw*hr;
+		}
+		else if (hw>40)
+		{
+			wage += hw*hr+(hw-40)*1.5;
+		}
+			
+		System.out.println("Salary is "+wage);
+
+	}
+
+}
