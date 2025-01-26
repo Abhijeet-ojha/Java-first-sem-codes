@@ -1,0 +1,59 @@
+import java.util.Scanner;
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+        System.out.println("Enter the number of elements in the array: ");
+        int n = sc.nextInt();
+        int a[] = new int[n];
+
+        System.out.println("Enter the elements of the array: ");
+        for (int i = 0; i < n; i++) {
+            a[i] = sc.nextInt();
+        }
+
+        System.out.println("Enter the number of steps to rotate the array by: ");
+        int k = sc.nextInt();
+        k = k % n;  // Optimize unnecessary rotations
+
+        System.out.println("Enter the direction to be rotated in (l for left, r for right): ");
+        char dir = sc.next().charAt(0);
+
+        if (dir == 'l') {
+            leftRotate(a, k, n);
+        } else if (dir == 'r') {
+            rightRotate(a, k, n);
+        } else {
+            System.out.println("Invalid direction. Use 'l' or 'r'.");
+        }
+
+        System.out.println("The rotated array is: ");
+        for (int i = 0; i < n; i++) {
+            System.out.print(a[i] + " ");
+        }
+        sc.close(); // Close scanner
+    }
+
+    // Left Rotation
+    static void leftRotate(int[] arr, int k, int n) {
+        for (int i = 0; i < k; i++) {
+            int temp = arr[0];
+            for (int j = 0; j < n - 1; j++) {
+                arr[j] = arr[j + 1];
+            }
+            arr[n - 1] = temp;
+        }
+    }
+
+    // Right Rotation
+    static void rightRotate(int[] arr, int k, int n) {
+        for (int i = 0; i < k; i++) {
+            int temp = arr[n - 1];
+            for (int j = n - 1; j > 0; j--) {
+                arr[j] = arr[j - 1];
+            }
+            arr[0] = temp;
+        }
+    }
+}
