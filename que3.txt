@@ -1,0 +1,15 @@
+
+//case 1
+        int x = 10;
+        double y = x;
+        System.out.println(y);
+        
+        //case 2
+        double x = 10.5;
+        int y = x;
+        System.out.println(y);
+
+        //case 3
+        double x = 10.5;
+        int y = (int) x;
+        System.out.println(y);
