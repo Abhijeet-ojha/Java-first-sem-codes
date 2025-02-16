@@ -1,0 +1,25 @@
+import java.util.Scanner;
+public class Main{
+    public static void main(String[] args){
+        Scanner sc= new Scanner(System.in);
+        System.out.println("enter date in ddmmyyyy format :");
+        String date = sc.nextLine();
+        int day=Integer.parseInt(date.substring(0,2));
+        int m=Integer.parseInt(date.substring(2,4));
+        int year=Integer.parseInt(date.substring(4,8))+60;
+        int flag=0;
+        if((year%4==0&&year%100!=0)||year%400==0){
+            flag=1;
+        }if(m==1||m==2||m==3||m==5||m==7||m==8||m==10||m==12){
+            if(m==2&&flag==1){
+                day=29;
+            }else if(m==2&&flag==0){
+                day=28;
+            }else{
+                day=31;
+            }
+        }else{
+            day=30;
+        }System.out.println("your retirement date will be:"+Integer.toString(day)+"-"+date.substring(2,4)+"-"+Integer.toString(year));
+    }
+}
