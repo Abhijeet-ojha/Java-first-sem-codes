@@ -1,0 +1,47 @@
+/*q1- Define a Class STUDENT having following
+Members: sname, marks_array, total, avg and provide the following methods:
+a. assign(): to assign initial values to the STUDENT object
+b. display(): to display the STUDENT object
+c. compute(): to Compute Total, Average marks*/
+import java.util.*;
+class Student{
+    String sname;
+    int marks_array[]= new int[5];
+    double total;
+    double avg;
+
+    void assign(){
+        Scanner sc= new Scanner(System.in);
+        System.out.println("enter student name:");
+        sname=sc.nextLine();
+        for(int i=0;i<5;i++){
+            System.out.println("enter marks for sub"+(i+1)+" : ");
+            marks_array[i]=sc.nextInt();
+        }
+    } void display(){
+        for (int j=0;j<5;j++){
+            System.out.println("marks of sub"+(j+1)+" = "+ marks_array[j]);
+        }
+        
+    } void compute(){
+        System.out.println("Student name : "+ sname);
+        total=0;
+        for (int j=0;j<5;j++){
+            total+=marks_array[j];
+        }avg=total/5;
+        System.out.println("total : "+total+" avg : "+avg);
+    }
+}
+class Main {
+    public static void main(String[] args) {
+        Scanner sc= new Scanner(System.in);
+        System.out.println("enter number of students : ");
+        int n=sc.nextInt();
+        for(int i=0;i<n;i++){
+            Student student = new Student();
+            student.assign();
+            student.compute();
+            student.display();
+        }
+    }
+}
