@@ -1,0 +1,61 @@
+import java.util.Scanner;
+
+class Mixer {
+    private int arr[];
+    
+    public Mixer(int size) {
+        arr = new int[size];
+    }
+    
+    public void accept() {
+        Scanner sc = new Scanner(System.in);
+        for (int i = 0; i < arr.length; i++) {
+            arr[i] = sc.nextInt();
+        }
+    }
+    
+    public Mixer mix(Mixer A) {
+        int newSize = this.arr.length + A.arr.length;
+        Mixer result = new Mixer(newSize);
+        
+        int i = 0, j = 0, k = 0;
+        while (i < this.arr.length && j < A.arr.length) {
+            result.arr[k++] = (this.arr[i] < A.arr[j]) ? this.arr[i++] : A.arr[j++];
+        }
+        
+        while (i < this.arr.length) {
+            result.arr[k++] = this.arr[i++];
+        }
+        
+        while (j < A.arr.length) {
+            result.arr[k++] = A.arr[j++];
+        }
+        
+        return result;
+    }
+    
+    public void display() {
+        for (int num : arr) {
+            System.out.print(num + " ");
+        }
+        System.out.println();
+    }
+}
+class Main{
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        System.out.println("enter size for array 1:");
+        int size1 = sc.nextInt();
+        System.out.println("enter "+size1+" elements for array1 : ");
+        Mixer mix1 = new Mixer(size1);
+        mix1.accept();
+        System.out.println("enter size for array 2:");
+        int size2 = sc.nextInt();
+        System.out.println("enter "+size2+" elements for array2 : ");
+        Mixer mix2 = new Mixer(size2);
+        mix2.accept();
+        Mixer merged = mix1.mix(mix2);
+        System.out.println("merged array : ");
+        merged.display();
+    }
+}
