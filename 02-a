@@ -1,0 +1,16 @@
+import java.util.Scanner;
+public class Main{
+    public static void main (String[] args){
+        Scanner sc= new Scanner(System.in);
+        System.out.println("distance tavelled:");
+        int dist= sc.nextInt();
+        int fare=0;
+        if(dist<5){
+            fare+=dist*10;
+        }else if(dist>5 && dist<=20){
+            fare+=(5*10)+((dist-5)*8);
+        }else if(dist>20){
+            fare+=(5*10)+(15*8)+((dist-20)*5);
+        }System.out.println("your total fare is:"+fare);
+    }
+}
