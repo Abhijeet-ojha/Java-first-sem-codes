@@ -1,0 +1,58 @@
+/*Now,Consider the already defined EMPLOYEE class. Provide a default constructor, and
+parameterized constructor. Also provide a display method. Illustrate all the
+constructors as well as the display method by defining EMPLOYEE objects.*/
+import java.util.Scanner;
+
+class Main {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        System.out.print("Enter number of employees: ");
+        int n = sc.nextInt();
+        sc.nextLine();
+        Emp[] employees = new Emp[n];
+        for (int i = 0; i < n; i++) {
+            System.out.println("\nEnter details for Employee " + (i + 1) + ": ");
+            System.out.print("Enter employee name: ");
+            String name = sc.nextLine();
+            System.out.print("Enter employee ID: ");
+            int id = sc.nextInt();
+            System.out.print("Enter basic salary: ");
+            double basic = sc.nextDouble();
+            sc.nextLine(); 
+            employees[i] = new Emp(name, id, basic);
+            employees[i].compute();
+        }System.out.println("\n***** Employee Details *****");
+        for (int i = 0; i < n; i++) {
+            employees[i].display();
+        }
+        sc.close();
+    }
+}
+
+class Emp {
+    String ename;
+    int eid;
+    double basic, da, gross_sal, net_sal;
+    public Emp() {
+        this.ename = "Unknown";
+        this.eid = 0;
+        this.basic = 0;
+    }public Emp(String name, int id, double basicSalary) {
+        this.ename = name;
+        this.eid = id;
+        this.basic = basicSalary;
+    }void compute() {
+        da = 0.52 * basic;
+        gross_sal = basic + da;
+        double it = 0.3 * gross_sal;
+        net_sal = gross_sal - it;
+    }void display() {
+        System.out.println("\nEmployee Name: " + ename);
+        System.out.println("Employee ID: " + eid);
+        System.out.println("Basic Salary: " + basic);
+        System.out.println("DA: " + da);
+        System.out.println("Gross Salary: " + gross_sal);
+        System.out.println("Net Salary: " + net_sal);
+        System.out.println("*****************************");
+    }
+}
