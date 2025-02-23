@@ -1,0 +1,52 @@
+import java.util.Scanner;
+
+public class Main {
+    public static void main(String[] args) {
+        Student s1 = new Student();
+        
+        String name = "Sujoy";
+        Student s2 = new Student(name);
+        s2.assign();
+ 
+        System.out.println("parameterized class:");
+        s2.display();
+        s2.compute();
+        System.out.println("default class:");
+        s1.display();
+        s1.compute();
+        }
+}
+class Student {
+    String sname;
+    int marks_array[] = new int[5];
+    double total;
+    double avg;
+    public Student() {
+        sname = "Default name";
+        marks_array = new int[]{50, 50, 50, 50, 50};
+    }public Student(String name) {
+        this.sname = name;
+    }void assign(){
+        Scanner sc= new Scanner(System.in);
+        System.out.println("enter your marks of five subjects : ");
+        for (int i=0;i<5;i++){
+            System.out.println("Enter marks for sub "+(i+1)+" :");
+            marks_array[i]=sc.nextInt();
+        }
+    }void compute() {
+        total = 0;
+        for (int j = 0; j < 5; j++) {
+            total += marks_array[j];
+        }
+        avg = total / 5.0;
+        
+        System.out.println("\nStudent Name: " + sname);
+        System.out.println("Total Marks: " + total);
+        System.out.println("Average Marks: " + avg);
+    }void display() {
+        System.out.println("Marks in Each Subject:");
+        for (int j = 0; j < 5; j++) {
+            System.out.println("Subject " + (j + 1) + ": " + marks_array[j]);
+        }
+    }
+}
