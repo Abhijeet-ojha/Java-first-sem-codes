@@ -25,13 +25,17 @@ public class Main {
         System.out.println("Enter initial deposit amount: ");
         double initialBalance = sc.nextDouble();
         BankAccount myAccount = new BankAccount(name, accNo, accType, initialBalance);
+        BankAccount myAccount1= new BankAccount();
         System.out.println("Enter amount to deposit: ");
         double depositAmount = sc.nextDouble();
         myAccount.deposit(depositAmount);
         System.out.println("Enter amount to withdraw: ");
         double withdrawAmount = sc.nextDouble();
         myAccount.withdraw(withdrawAmount);
+        System.out.println("parametrized class: ");
         myAccount.displayAccountDetails();
+        System.out.println("default class: ");
+        myAccount1.displayAccountDetails();
         BankAccount.displayInterestRate();
         sc.close();
     }
@@ -78,4 +82,5 @@ class BankAccount {
         System.out.println("Current Rate of Interest: " + rateOfInterest + "% per annum");
     }
 }
+
 
