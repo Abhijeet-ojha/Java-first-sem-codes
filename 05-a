@@ -1,0 +1,96 @@
+import java.util.Scanner;
+
+public class Main {
+    public static void main(String[] args) {
+        Student s1 = new Student();
+        String name = "Sujoy";
+        Student s2 = new Student(name);
+        
+        s2.assignSubjects();
+ 
+        System.out.println("\nParameterized Student:");
+        s2.display();
+        s2.compute();
+        
+        System.out.println("\nDefault Student:");
+        s1.display();
+        s1.compute();
+    }
+}
+
+class Student {
+    String sname;
+    Subject[] subjects;
+    double total;
+    double avg;
+
+    class Subject {
+        String subjectName;
+        int marks;
+
+        Subject(String subjectName) {
+            this.subjectName = subjectName;
+            this.marks = 50; // Default marks
+        }
+
+        void assignMarks(int marks) {
+            this.marks = marks;
+        }
+
+        void displaySubject() {
+            System.out.println(subjectName + ": " + marks);
+        }
+    }
+
+    public Student() {
+        sname = "Default Name";
+        subjects = new Subject[]{
+            new Subject("Math"),
+            new Subject("Science"),
+            new Subject("English"),
+            new Subject("History"),
+            new Subject("Computer Science")
+        };
+    }
+
+    public Student(String name) {
+        this.sname = name;
+        subjects = new Subject[]{
+            new Subject("Math"),
+            new Subject("Science"),
+            new Subject("English"),
+            new Subject("History"),
+            new Subject("Computer Science")
+        };
+    }
+
+    void assignSubjects() {
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Enter marks for five subjects:");
+        for (int i = 0; i < subjects.length; i++) {
+            System.out.print("Enter marks for " + subjects[i].subjectName + ": ");
+            int marks = sc.nextInt();
+            subjects[i].assignMarks(marks);
+        }
+    }
+
+    void compute() {
+        total = 0;
+        for (Subject subject : subjects) {
+            total += subject.marks;
+        }
+        avg = total / subjects.length;
+        
+        System.out.println("\nStudent Name: " + sname);
+        System.out.println("Total Marks: " + total);
+        System.out.println("Average Marks: " + avg);
+    }
+
+    void display() {
+        System.out.println("\nStudent Name: " + sname);
+        System.out.println("Marks in Each Subject:");
+        for (Subject subject : subjects) {
+            subject.displaySubject();
+        }
+    }
+}
