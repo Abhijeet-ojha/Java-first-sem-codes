@@ -1,0 +1,113 @@
+/* 2. Employee Class
+Implement an EMPLOYEE class with an inner class named Department that handles
+department-related details. The inner class Department should:
+a. Contain fields for departmentName and location.
+b. Provide methods to set and display department details.
+The EMPLOYEE class should:
+Contain fields for eName (employee name), salary, and an array of Department objects.
+Provide methods to:
+c) Add departments.
+d) Display employee details along with department information.*/
+
+import java.util.Scanner;
+
+class Main {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        System.out.print("Enter number of employees: ");
+        int n = sc.nextInt();
+        sc.nextLine();
+        Emp[] employees = new Emp[n];
+        for (int i = 0; i < n; i++) {
+            System.out.println("\nEnter details for Employee " + (i + 1) + ": ");
+            System.out.print("Enter employee name: ");
+            String name = sc.nextLine();
+            System.out.print("Enter employee ID: ");
+            int id = sc.nextInt();
+            System.out.print("Enter basic salary: ");
+            double basic = sc.nextDouble();
+            sc.nextLine(); 
+            
+            System.out.print("Enter number of departments: ");
+            int deptCount = sc.nextInt();
+            sc.nextLine();
+            Emp.Department[] departments = new Emp.Department[deptCount];
+            
+            for (int j = 0; j < deptCount; j++) {
+                System.out.println("Enter details for Department " + (j + 1) + ":");
+                System.out.print("Enter department name: ");
+                String deptName = sc.nextLine();
+                System.out.print("Enter department location: ");
+                String location = sc.nextLine();
+                departments[j] = new Emp.Department(deptName, location);
+            }
+            
+            employees[i] = new Emp(name, id, basic, departments);
+            employees[i].compute();
+        }
+        
+        System.out.println("\n***** Employee Details *****");
+        for (int i = 0; i < n; i++) {
+            employees[i].display();
+        }
+        
+        sc.close();
+    }
+}
+
+class Emp {
+    String ename;
+    int eid;
+    double basic, da, gross_sal, net_sal;
+    Department[] departments;
+
+    static class Department {
+        String departmentName;
+        String location;
+
+        Department(String departmentName, String location) {
+            this.departmentName = departmentName;
+            this.location = location;
+        }
+
+        void displayDepartment() {
+            System.out.println("Department Name: " + departmentName);
+            System.out.println("Location: " + location);
+        }
+    }
+
+    public Emp() {
+        this.ename = "Unknown";
+        this.eid = 0;
+        this.basic = 0;
+        this.departments = new Department[0];
+    }
+
+    public Emp(String name, int id, double basicSalary, Department[] departments) {
+        this.ename = name;
+        this.eid = id;
+        this.basic = basicSalary;
+        this.departments = departments;
+    }
+
+    void compute() {
+        da = 0.52 * basic;
+        gross_sal = basic + da;
+        double it = 0.3 * gross_sal;
+        net_sal = gross_sal - it;
+    }
+
+    void display() {
+        System.out.println("\nEmployee Name: " + ename);
+        System.out.println("Employee ID: " + eid);
+        System.out.println("Basic Salary: " + basic);
+        System.out.println("DA: " + da);
+        System.out.println("Gross Salary: " + gross_sal);
+        System.out.println("Net Salary: " + net_sal);
+        System.out.println("Departments:");
+        for (Department dept : departments) {
+            dept.displayDepartment();
+        }
+        System.out.println("*****************************");
+    }
+}
