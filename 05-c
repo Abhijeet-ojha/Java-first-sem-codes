@@ -1,0 +1,78 @@
+/* 3. Implement a ShoppingCart class that contains an inner class Item.
+a) The Item class should have fields like itemName, quantity, and price.
+b) The ShoppingCart class should provide methods to add items, calculate the total price,
+and display the cart contents. */
+
+import java.util.*;
+
+class Main {
+    public static void main(String[] args) {
+        ShoppingCart cart = new ShoppingCart();
+        Scanner sc = new Scanner(System.in);
+        
+        System.out.print("Enter number of items: ");
+        int n = sc.nextInt();
+        sc.nextLine();
+        
+        for (int i = 0; i < n; i++) {
+            System.out.println("\nEnter details for Item " + (i + 1) + ": ");
+            System.out.print("Enter item name: ");
+            String name = sc.nextLine();
+            System.out.print("Enter quantity: ");
+            int quantity = sc.nextInt();
+            System.out.print("Enter price: ");
+            double price = sc.nextDouble();
+            sc.nextLine(); 
+            
+            cart.addItem(name, quantity, price);
+        }
+        
+        System.out.println("\n***** Shopping Cart *****");
+        cart.displayCart();
+        System.out.println("Total Price: " + cart.calculateTotal());
+        
+        sc.close();
+    }
+}
+
+class ShoppingCart {
+    private ArrayList<Item> items;
+    
+    class Item {
+        String itemName;
+        int quantity;
+        double price;
+        
+        Item(String itemName, int quantity, double price) {
+            this.itemName = itemName;
+            this.quantity = quantity;
+            this.price = price;
+        }
+        
+        void displayItem() {
+            System.out.println(itemName + " - Quantity: " + quantity + ", Price: " + price);
+        }
+    }
+    
+    public ShoppingCart() {
+        items = new ArrayList<>();
+    }
+    
+    void addItem(String itemName, int quantity, double price) {
+        items.add(new Item(itemName, quantity, price));
+    }
+    
+    double calculateTotal() {
+        double total = 0;
+        for (Item item : items) {
+            total += item.quantity * item.price;
+        }
+        return total;
+    }
+    
+    void displayCart() {
+        for (Item item : items) {
+            item.displayItem();
+        }
+    }
+}
