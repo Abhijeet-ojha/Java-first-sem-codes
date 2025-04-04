@@ -1,0 +1,60 @@
+// Online Java Compiler
+// Use this editor to write, compile and run your Java code online
+import java.util.*;
+class Studentclass{
+    public static void main(String[] args) {
+        Scanner sc= new Scanner(System.in);
+        System.out.println("enter no of entries: ");
+        int n= sc.nextInt();
+        sc.nextLine();
+        Student[] stu= new Student[n];
+        for(int i=0;i<n;i++){
+            System.out.println("enter name for student"+(i+1));
+            String nam= sc.nextLine();
+            stu[i]= new Student(nam);
+        }
+        System.out.println("\nStudent details:\n");
+        for(int i=0;i<n;i++){
+            stu[i].display();
+        }
+        System.out.println("Enter substring you want to search: ");
+        String sub = sc.nextLine();
+        Student.search(sub,stu);
+        
+        System.out.println("\nStudent name in aplhabetical order:\n");
+        Student.sort(stu);
+    }
+}
+public class Student{
+    String name;
+    Student(String nam){ this.name=nam;}
+    String extractinitials(){
+        String[] words=name.split(" ");
+        String initials="";
+        for(int i=0;i<words.length;i++){
+            String[] name2= words[i].split("");
+            initials+=name2[0].toUpperCase();
+        } return initials;
+    }
+    String removewhitespace(){
+         String[] Name_capital= name.split(" ");
+         String name1="";
+         for (String name: Name_capital){
+              name1 += (name.substring(0, 1).toUpperCase() + name.substring(1).toLowerCase());
+         }
+        return name1.trim();
+    }
+    static void search(String sub, Student[] stu){
+        for(int i=0;i<stu.length;i++){
+            if(stu[i].name.contains(sub)){System.out.println(stu[i].name);}
+        }
+    }
+    static void sort(Student[] stu){
+          Arrays.sort(stu, Comparator.comparing(Student->Student.name));
+          for(int i=0;i<stu.length;i++){System.out.println(stu[i].name);}
+    }
+    void display(){
+        System.out.println("NAME:"+removewhitespace()+"\nINITIALS:"+extractinitials());
+    }
+    
+}
