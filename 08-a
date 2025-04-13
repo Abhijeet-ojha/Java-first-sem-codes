@@ -1,0 +1,59 @@
+abstract class Figure {
+    int x, y;
+
+    Figure(int x, int y) {
+        this.x = x;
+        this.y = y;
+    }
+
+    abstract void area(); // abstract method
+}
+
+class Rectangle extends Figure {
+    Rectangle(int length, int breadth) {
+        super(length, breadth);
+    }
+
+    void area() {
+        int result = x * y;
+        System.out.println("Area of Rectangle: " + result);
+    }
+}
+
+class Triangle extends Figure {
+    Triangle(int base, int height) {
+        super(base, height);
+    }
+
+    void area() {
+        double result = 0.5 * x * y;
+        System.out.println("Area of Triangle: " + result);
+    }
+}
+
+class Square extends Figure {
+    Square(int side) {
+        super(side, side); // both x and y are side for a square
+    }
+
+    void area() {
+        int result = x * x;
+        System.out.println("Area of Square: " + result);
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        // Dynamic polymorphism
+        Figure fig;
+
+        fig = new Rectangle(10, 5);
+        fig.area(); // Rectangle's area method is called
+
+        fig = new Triangle(8, 4);
+        fig.area(); // Triangle's area method is called
+
+        fig = new Square(6);
+        fig.area(); // Square's area method is called
+    }
+}
