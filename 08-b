@@ -1,0 +1,51 @@
+// Interface declaration
+interface Series {
+    int getNext();         // to get next number in series
+    void reset();          // to reset the series to start
+    void setStart(int x);  // to set the starting value
+}
+
+// Class implementing Series to generate numbers by twos
+class ByTwos implements Series {
+    private int start;
+    private int current;
+
+    public void setStart(int x) {
+        start = x;
+        current = x;
+    }
+
+    public int getNext() {
+        current += 2;
+        return current;
+    }
+
+    public void reset() {
+        current = start;
+    }
+}
+
+// Class with main method to demonstrate functionality
+public class Main {
+    public static void main(String[] args) {
+        Series series = new ByTwos(); // interface reference
+
+        series.setStart(0);  // start from 0
+        System.out.println("Series by twos:");
+        for (int i = 0; i < 5; i++) {
+            System.out.println(series.getNext());
+        }
+
+        series.reset();
+        System.out.println("After reset:");
+        for (int i = 0; i < 3; i++) {
+            System.out.println(series.getNext());
+        }
+
+        series.setStart(10);
+        System.out.println("After setting new start to 10:");
+        for (int i = 0; i < 3; i++) {
+            System.out.println(series.getNext());
+        }
+    }
+}
