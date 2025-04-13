@@ -1,0 +1,157 @@
+
+
+import java.util.Scanner;
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+        // Base Student
+        Student baseStudent = new Student("Rahul");
+        baseStudent.assignSubjects();
+        baseStudent.display();
+        baseStudent.compute();
+
+        // Science Student
+        ScienceStudent sciStudent = new ScienceStudent("Anjali", 20); // practicalMarks = 20
+        sciStudent.assignSubjects();
+        sciStudent.display();
+        sciStudent.displayPracticalMarks();
+        sciStudent.compute();
+
+        // Arts Student
+        ArtsStudent artsStudent = new ArtsStudent("Meera", "Psychology");
+        artsStudent.assignSubjects();
+        artsStudent.display();
+        artsStudent.compute();
+
+        // Dynamic Polymorphism
+        System.out.println("\n--- Dynamic Polymorphism Demo ---");
+        Student ref;
+
+        ref = sciStudent;
+        ref.compute();  // ScienceStudent's compute()
+
+        ref = artsStudent;
+        ref.compute();  // Student's compute()
+    }
+}
+
+class Student {
+    String sname;
+    Subject[] subjects;
+    double total;
+    double avg;
+
+    class Subject {
+        String subjectName;
+        int marks;
+
+        Subject(String subjectName) {
+            this.subjectName = subjectName;
+            this.marks = 50; // Default marks
+        }
+
+        void assignMarks(int marks) {
+            this.marks = marks;
+        }
+
+        void displaySubject() {
+            System.out.println(subjectName + ": " + marks);
+        }
+    }
+
+    public Student() {
+        sname = "Default Name";
+        subjects = defaultSubjects();
+    }
+
+    public Student(String name) {
+        this.sname = name;
+        subjects = defaultSubjects();
+    }
+
+    protected Subject[] defaultSubjects() {
+        return new Subject[]{
+            new Subject("Math"),
+            new Subject("Science"),
+            new Subject("English"),
+            new Subject("History"),
+            new Subject("Computer Science")
+        };
+    }
+
+    void assignSubjects() {
+        Scanner sc = new Scanner(System.in);
+        System.out.println("\nEnter marks for five subjects for " + sname + ":");
+        for (int i = 0; i < subjects.length; i++) {
+            System.out.print("Enter marks for " + subjects[i].subjectName + ": ");
+            int marks = sc.nextInt();
+            subjects[i].assignMarks(marks);
+        }
+    }
+
+    void compute() {
+        total = 0;
+        for (Subject subject : subjects) {
+            total += subject.marks;
+        }
+        avg = total / subjects.length;
+
+        System.out.println("\nStudent Name: " + sname);
+        System.out.println("Total Marks: " + total);
+        System.out.println("Average Marks: " + avg);
+    }
+
+    void display() {
+        System.out.println("\nStudent Name: " + sname);
+        System.out.println("Marks in Each Subject:");
+        for (Subject subject : subjects) {
+            subject.displaySubject();
+        }
+    }
+}
+
+// Subclass 1: ScienceStudent
+class ScienceStudent extends Student {
+    int practicalMarks;
+
+    public ScienceStudent(String name, int practicalMarks) {
+        super(name); // Calling base class constructor
+        this.practicalMarks = practicalMarks;
+    }
+
+    @Override
+    void compute() {
+        total = 0;
+        for (Subject subject : subjects) {
+            total += subject.marks;
+        }
+        total += practicalMarks;
+        avg = total / (subjects.length + 1);
+
+        System.out.println("\nScience Student Name: " + sname);
+        System.out.println("Total (Including Practical): " + total);
+        System.out.println("Average (Including Practical): " + avg);
+    }
+
+    void displayPracticalMarks() {
+        System.out.println("Practical Marks: " + practicalMarks);
+    }
+}
+
+// Subclass 2: ArtsStudent
+class ArtsStudent extends Student {
+    String electiveSubject;
+
+    public ArtsStudent(String name, String electiveSubject) {
+        super(name); // Using 'super' to call parent constructor
+        this.electiveSubject = electiveSubject;
+    }
+
+    @Override
+    void display() {
+        super.display();
+        System.out.println("Elective Subject: " + electiveSubject);
+    }
+}
