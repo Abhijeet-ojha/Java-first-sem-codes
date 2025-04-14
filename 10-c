@@ -1,0 +1,33 @@
+public class MarksValidationDemo {
+
+    static class Student {
+        public double calculateAverage(int totalMarks, int numberOfSubjects) {
+            if (totalMarks == 0 || numberOfSubjects == 0) {
+                throw new ArithmeticException("Total marks or number of subjects cannot be zero.");
+            }
+            return (double) totalMarks / numberOfSubjects;
+        }
+    }
+
+    public static void main(String[] args) {
+        Student student = new Student();
+
+        try {
+            System.out.println("Average (valid): " + student.calculateAverage(450, 5));
+        } catch (ArithmeticException e) {
+            System.out.println("Error (valid test): " + e.getMessage());
+        }
+
+        try {
+            System.out.println("Average (invalid - zero subjects): " + student.calculateAverage(300, 0));
+        } catch (ArithmeticException e) {
+            System.out.println("Error (invalid test): " + e.getMessage());
+        }
+
+        try {
+            System.out.println("Average (zero marks): " + student.calculateAverage(0, 4));
+        } catch (ArithmeticException e) {
+            System.out.println("Error (zero marks test): " + e.getMessage());
+        }
+    }
+}
